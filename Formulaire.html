@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVW | Formulaire Email</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("form");
+        const btn = document.getElementById("button");
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault(); // Empêche le rechargement de la page
+
+          btn.value = "Envoi en cours...";
+
+          const serviceID = "default_service";
+          const templateID = "template_ftqeh08";
+
+          emailjs.sendForm(serviceID, templateID, form).then(
+            () => {
+              btn.value = "Envoyer l'email";
+              alert("Votre message a été envoyé avec succès !");
+              form.reset(); // Réinitialise le formulaire
+            },
+            (err) => {
+              btn.value = "Envoyer l'email";
+              alert("Une erreur s'est produite. Veuillez réessayer.");
+              console.error(err);
+            }
+          );
+        });
+      });
+    </script>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #6d74e3, #9b59b6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Effet de paillettes */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.2) 1px,
+          transparent 1px
+        );
+        background-size: 50px 50px;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      body::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .field {
+        margin-bottom: 15px;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .field input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .field input:focus {
+        border-color: #6d74e3;
+        outline: none;
+        box-shadow: 0 0 8px rgba(109, 116, 227, 0.5);
+        background: rgba(255, 255, 255, 1);
+      }
+
+      #button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #6d74e3, #9b59b6);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      #button:hover {
+        background: linear-gradient(135deg, #9b59b6, #6d74e3);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+      }
+
+      #button:active {
+        transform: scale(0.98);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form">
+        <div class="field">
+          <label for="title">Titre</label>
+          <input type="text" name="title" id="title" required />
+        </div>
+        <div class="field">
+          <label for="name">Nom</label>
+          <input type="text" name="name" id="name" required />
+        </div>
+        <div class="field">
+          <label for="time">Heure</label>
+          <input type="text" name="time" id="time" required />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <input type="text" name="message" id="message" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required />
+        </div>
+        <input type="submit" id="button" value="Envoyer l'email" />
+      </form>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+
+    <script type="text/javascript">
+      emailjs.init("fAO2AIiqnNWthUTJk");
+    </script>
+  </body>
+</html>
